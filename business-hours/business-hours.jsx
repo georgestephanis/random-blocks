@@ -33,10 +33,13 @@ const HoursRow = function( props ) {
             </dt>
             <dd>
                 <TextControl
+                    type="time"
                     label={ __( 'Opening', 'random-blocks' ) }
                     value={ props.opening }
                 />
+                &nbsp;&mdash;&nbsp;
                 <TextControl
+                    type="time"
                     label={ __( 'Closing', 'random-blocks' ) }
                     value={ props.closing }
                 />
@@ -47,7 +50,7 @@ const HoursRow = function( props ) {
 
 const HoursList = function( props ) {
     return (
-        <dl>
+        <dl class="business-hours">
             <HoursRow
                 day="Sun"
                 { ...props.hours.Sun }

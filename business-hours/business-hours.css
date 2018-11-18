@@ -1,0 +1,16 @@
+.business-hours {
+
+}
+
+.business-hours dt {
+
+}
+
+.business-hours dd {
+    overflow: hidden;
+}
+
+.business-hours dd > .components-base-control {
+    display: inline-block;
+    width: 45%;
+}
