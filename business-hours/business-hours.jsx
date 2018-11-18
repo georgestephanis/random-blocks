@@ -25,23 +25,44 @@ const {
  * Internal dependencies
  */
 
-const HoursRow = function( props ) {
+
+const HoursRow = ( { day, hours, setAttributes, resetFocus } ) => {
     return (
         <Fragment>
             <dt>
-                { props.day }
+                { day }
             </dt>
             <dd>
                 <TextControl
                     type="time"
                     label={ __( 'Opening', 'random-blocks' ) }
-                    value={ props.opening }
+                    value={ hours[ day ].opening }
+                    onChange={ value => {
+                        resetFocus && resetFocus();
+                        setAttributes( { hours: {
+                            ...hours,
+                            [ day ]: {
+                                ...hours[ day ],
+                                opening: value,
+                            }
+                        } } );
+                    } }
                 />
                 &nbsp;&mdash;&nbsp;
                 <TextControl
                     type="time"
                     label={ __( 'Closing', 'random-blocks' ) }
-                    value={ props.closing }
+                    value={ hours[ day ].closing }
+                    onChange={ value => {
+                        resetFocus && resetFocus();
+                        setAttributes( { hours: {
+                            ...hours,
+                            [ day ]: {
+                                ...hours[ day ],
+                                closing: value,
+                            }
+                        } } );
+                    } }
                 />
             </dd>
         </Fragment>
@@ -50,34 +71,34 @@ const HoursRow = function( props ) {
 
 const HoursList = function( props ) {
     return (
-        <dl class="business-hours">
+        <dl className="business-hours">
             <HoursRow
                 day="Sun"
-                { ...props.hours.Sun }
+                { ...props }
             />
             <HoursRow
                 day="Mon"
-                { ...props.hours.Mon }
+                { ...props }
             />
             <HoursRow
                 day="Tue"
-                { ...props.hours.Tue }
+                { ...props }
             />
             <HoursRow
                 day="Wed"
-                { ...props.hours.Wed }
+                { ...props }
             />
             <HoursRow
                 day="Thu"
-                { ...props.hours.Thu }
+                { ...props }
             />
             <HoursRow
                 day="Fri"
-                { ...props.hours.Fri }
+                { ...props }
             />
             <HoursRow
                 day="Sat"
-                { ...props.hours.Sat }
+                { ...props }
             />
         </dl>
     );
@@ -104,8 +125,8 @@ registerBlockType( 'random-blocks/business-hours', {
                     closing: '',
                 },
                 Mon: {
-                    opening: '8:00',
-                    closing: '5:00',
+                    opening: '',
+                    closing: '',
                 },
                 Tue: {
                     opening: '',
@@ -135,6 +156,7 @@ registerBlockType( 'random-blocks/business-hours', {
         return (
             <HoursList
                 hours={ props.attributes.hours }
+                setAttributes={ props.setAttributes }
             />
         );
     },
@@ -142,4 +164,4 @@ registerBlockType( 'random-blocks/business-hours', {
     save: function() {
         return null;
     }
-    } );
+} );
