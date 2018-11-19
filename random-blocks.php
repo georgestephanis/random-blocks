@@ -6,7 +6,6 @@
 
 // Business Hours
 
-
 add_action( 'init', 'register_business_hours_block' );
 function register_business_hours_block() {
 	global $wp_locale;
@@ -25,6 +24,7 @@ function register_business_hours_block() {
 			'Fri' => $wp_locale->get_weekday( 5 ),
 			'Sat' => $wp_locale->get_weekday( 6 ),
 		),
+        'start_of_week' => (int) get_option( 'start_of_week', 0 ),
 	) );
 
 	wp_register_style( 'business-hours', plugins_url( 'business-hours/business-hours.css', __FILE__ ) );
@@ -43,19 +43,22 @@ function register_business_hours_block() {
 function render_business_hours_block( $attributes, $content ) {
 	global $wp_locale;
 
+	if ( empty( $attributes['hours'] ) || ! is_array( $attributes['hours'] ) ) {
+		return $content;
+	}
+
+	$start_of_week = (int) get_option( 'start_of_week', 0 );
 	$time_format = get_option( 'time_format' );
 	$today = current_time( 'D' );
 	$content = '<dl class="business-hours built-by-php">';
 
-	$days = array(
-		'Sun',
-		'Mon',
-		'Tue',
-		'Wed',
-		'Thu',
-		'Fri',
-		'Sat',
-	);
+	$days = array( 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' );
+
+	if ( $start_of_week ) {
+        $chunk1 = array_slice( $attributes['hours'], 0, $start_of_week );
+        $chunk2 = array_slice( $attributes['hours'], $start_of_week );
+        $attributes['hours'] = array_merge( $chunk2, $chunk1 );
+    }
 
 	foreach ( $attributes['hours'] as $day => $hours ) {
 		$opening = strtotime( $hours['opening'] );
