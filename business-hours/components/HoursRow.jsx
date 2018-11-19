@@ -24,12 +24,12 @@ const {
 const HoursRow = ( { day, hours, setAttributes, resetFocus, edit = true } ) => {
 	return (
 		<Fragment>
-			<dt>
+			<dt className={ day }>
 				{ businessHours.days[ day ] }
 			</dt>
 			{ ( edit || hours[ day ].opening && hours[ day ].closing ) ?
 				(
-					<dd>
+					<dd className={ day }>
 						{
 							edit ? ( <TextControl
 								type="time"
@@ -67,7 +67,7 @@ const HoursRow = ( { day, hours, setAttributes, resetFocus, edit = true } ) => {
 						}
 					</dd>
 				) : (
-					<dd>
+					<dd className={ day + ' closed' }>
 						{ __( 'CLOSED', 'random-blocks' ) }
 					</dd>
 				)
