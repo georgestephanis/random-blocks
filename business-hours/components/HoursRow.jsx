@@ -38,12 +38,12 @@ const HoursRow = ( { day, hours, setAttributes, resetFocus, edit = true } ) => {
 								onChange={ value => {
 									resetFocus && resetFocus();
 									setAttributes( { hours: {
-											...hours,
-											[ day ]: {
-												...hours[ day ],
-												opening: value,
-											}
-										} } );
+										...hours,
+										[ day ]: {
+											...hours[ day ],
+											opening: value,
+										}
+									} } );
 								} }
 							/> ) : hours[ day ].opening
 						}
@@ -56,12 +56,12 @@ const HoursRow = ( { day, hours, setAttributes, resetFocus, edit = true } ) => {
 								onChange={ value => {
 									resetFocus && resetFocus();
 									setAttributes( { hours: {
-											...hours,
-											[ day ]: {
-												...hours[ day ],
-												closing: value,
-											}
-										} } );
+										...hours,
+										[ day ]: {
+											...hours[ day ],
+											closing: value,
+										}
+									} } );
 								} }
 							/> ) : hours[ day ].closing
 						}

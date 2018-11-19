@@ -72,17 +72,17 @@ registerBlockType( 'random-blocks/business-hours', {
 			<HoursList
 				hours={ props.attributes.hours }
 				setAttributes={ props.setAttributes }
-                edit={ true }
+				edit={ true }
 			/>
 		);
 	},
 
 	save: function( props ) {
-        return (
-            <HoursList
-                hours={ props.attributes.hours }
-                edit={ false }
-            />
-        );
+		return (
+			<HoursList
+				hours={ props.attributes.hours }
+				edit={ false }
+			/>
+		);
 	}
 } );
