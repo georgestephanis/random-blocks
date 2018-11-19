@@ -5,7 +5,9 @@
   "main": "random-blocks.php",
   "private": true,
   "scripts": {
-    "build": "parcel build business-hours/business-hours.jsx --out-dir business-hours --public-url ."
+    "build-hours": "parcel build business-hours/business-hours.jsx --out-dir business-hours --public-url .",
+    "build-phone": "parcel build contact-phone/contact-phone.jsx --out-dir contact-phone --public-url .",
+    "build": "npm run build-hours & npm run build-phone"
   },
   "keywords": [
     "wordpress",
@@ -19,6 +21,8 @@
     "@babel/runtime-corejs2": "^7.1.2",
     "@wordpress/babel-preset-default": "^2.1.0",
     "parcel-bundler": "^1.10.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "sass": "^1.15.1"
   },
   "dependencies": {
