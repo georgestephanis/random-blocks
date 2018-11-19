@@ -17,6 +17,7 @@ const {
  * Internal dependencies
  */
 
+import './business-hours.scss'
 import HoursList from './components/HoursList';
 
 /**
