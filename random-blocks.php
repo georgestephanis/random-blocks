@@ -10,6 +10,10 @@ add_action( 'init', 'register_business_hours_block' );
 function register_business_hours_block() {
 	global $wp_locale;
 
+	if ( ! function_exists( 'register_block_type' ) ) {
+		return;
+	}
+
 	wp_register_script( 'business-hours', plugins_url( 'business-hours/business-hours.js', __FILE__ ) );
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'business-hours', 'random-blocks' );
@@ -24,7 +28,7 @@ function register_business_hours_block() {
 			'Fri' => $wp_locale->get_weekday( 5 ),
 			'Sat' => $wp_locale->get_weekday( 6 ),
 		),
-        'start_of_week' => (int) get_option( 'start_of_week', 0 ),
+		'start_of_week' => (int) get_option( 'start_of_week', 0 ),
 	) );
 
 	wp_register_style( 'business-hours', plugins_url( 'business-hours/business-hours.css', __FILE__ ) );
@@ -55,10 +59,10 @@ function render_business_hours_block( $attributes, $content ) {
 	$days = array( 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' );
 
 	if ( $start_of_week ) {
-        $chunk1 = array_slice( $attributes['hours'], 0, $start_of_week );
-        $chunk2 = array_slice( $attributes['hours'], $start_of_week );
-        $attributes['hours'] = array_merge( $chunk2, $chunk1 );
-    }
+		$chunk1 = array_slice( $attributes['hours'], 0, $start_of_week );
+		$chunk2 = array_slice( $attributes['hours'], $start_of_week );
+		$attributes['hours'] = array_merge( $chunk2, $chunk1 );
+	}
 
 	foreach ( $attributes['hours'] as $day => $hours ) {
 		$opening = strtotime( $hours['opening'] );
@@ -96,6 +100,10 @@ function render_business_hours_block( $attributes, $content ) {
 
 add_action( 'init', 'register_contact_phone_block' );
 function register_contact_phone_block() {
+	if ( ! function_exists( 'register_block_type' ) ) {
+		return;
+	}
+
 	wp_register_script( 'contact-phone-editor', plugins_url( 'contact-phone/contact-phone.js', __FILE__ ) );
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'contact-phone', 'random-blocks' );
