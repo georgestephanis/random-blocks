@@ -16,7 +16,42 @@ function register_business_hours_block() {
 	}
 	register_block_type( 'random-blocks/business-hours', array(
 		'style' => 'business-hours',
+		'render_callback' => 'render_business_hours_block',
 	) );
+}
+
+function render_business_hours_block( $attributes, $content ) {
+	global $wp_locale;
+
+	$time_format = get_option( 'time_format' );
+	$content = '<dl class="business-hours built-by-php">';
+
+	$days = array(
+		'Sun',
+		'Mon',
+		'Tue',
+		'Wed',
+		'Thu',
+		'Fri',
+		'Sat',
+	);
+
+	foreach ( $attributes['hours'] as $day => $hours ) {
+		$content .= '<dt class="' . esc_attr( $day ) . '">' . $wp_locale->get_weekday( array_search( $day, $days ) ) . '</dt>';
+		$content .= '<dd class="' . esc_attr( $day ) . '">';
+		if ( $hours['opening'] && $hours['closing'] ) {
+			$content .= date( $time_format, strtotime( $hours['opening'] ) );
+			$content .= '&nbsp;&mdash;&nbsp;';
+			$content .= date( $time_format, strtotime( $hours['closing'] ) );
+		} else {
+			$content .= esc_html__( 'CLOSED', 'random-blocks' );
+		}
+		$content .= '</dd>';
+	}
+
+	$content .= '</dl>';
+
+	return $content;
 }
 
 add_action( 'enqueue_block_editor_assets', 'enqueue_business_hours_block_editor_assets' );
