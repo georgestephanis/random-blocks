@@ -9,10 +9,14 @@
 
 add_action( 'init', 'register_business_hours_block' );
 function register_business_hours_block() {
-    wp_register_style( 'business-hours', plugins_url( 'business-hours/business-hours.css', __FILE__ ) );
-    register_block_type( 'random-blocks/business-hours', array(
-        'style' => 'business-hours',
-    ) );
+	wp_register_style( 'business-hours', plugins_url( 'business-hours/business-hours.css', __FILE__ ) );
+	if ( ! is_admin() ) {
+		$inline_style = '.business-hours .' . current_time( 'D' ) . ' { font-weight: 900; }';
+		wp_add_inline_style( 'business-hours', $inline_style );
+	}
+	register_block_type( 'random-blocks/business-hours', array(
+		'style' => 'business-hours',
+	) );
 }
 
 add_action( 'enqueue_block_editor_assets', 'enqueue_business_hours_block_editor_assets' );
