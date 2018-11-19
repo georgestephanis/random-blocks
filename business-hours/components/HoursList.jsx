@@ -5,10 +5,6 @@
  * External dependencies
  */
 
-const {
-    createElement
-} = wp.element;
-
 /**
  * Internal dependencies
  */
