@@ -5,7 +5,7 @@
   "main": "random-blocks.php",
   "private": true,
   "scripts": {
-    "build": "parcel build business-hours/business-hours.jsx --out-dir business-hours"
+    "build": "parcel build business-hours/business-hours.jsx --out-dir business-hours --public-url ."
   },
   "keywords": [
     "wordpress",
