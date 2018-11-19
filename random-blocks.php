@@ -24,6 +24,7 @@ function render_business_hours_block( $attributes, $content ) {
 	global $wp_locale;
 
 	$time_format = get_option( 'time_format' );
+	$today = current_time( 'D' );
 	$content = '<dl class="business-hours built-by-php">';
 
 	$days = array(
@@ -37,12 +38,26 @@ function render_business_hours_block( $attributes, $content ) {
 	);
 
 	foreach ( $attributes['hours'] as $day => $hours ) {
+		$opening = strtotime( $hours['opening'] );
+		$closing = strtotime( $hours['closing'] );
+
 		$content .= '<dt class="' . esc_attr( $day ) . '">' . $wp_locale->get_weekday( array_search( $day, $days ) ) . '</dt>';
 		$content .= '<dd class="' . esc_attr( $day ) . '">';
 		if ( $hours['opening'] && $hours['closing'] ) {
-			$content .= date( $time_format, strtotime( $hours['opening'] ) );
+			$content .= date( $time_format, $opening );
 			$content .= '&nbsp;&mdash;&nbsp;';
-			$content .= date( $time_format, strtotime( $hours['closing'] ) );
+			$content .= date( $time_format, $closing );
+
+			if ( $today === $day ) {
+				$now = strtotime( current_time( 'H:i' ) );
+				if ( $now < $opening ) {
+					$content .= '<br />';
+					$content .= esc_html( sprintf( __( 'Opening in %s', 'random-blocks' ), human_time_diff( $now, $opening ) ) );
+				} elseif ( $now >= $opening && $now < $closing ) {
+					$content .= '<br />';
+					$content .= esc_html( sprintf( __( 'Closing in %s', 'random-blocks' ), human_time_diff( $now, $closing ) ) );
+				}
+			}
 		} else {
 			$content .= esc_html__( 'CLOSED', 'random-blocks' );
 		}
