@@ -4,6 +4,7 @@
  * Plugin Name: Random Blocks
  * Plugin URI:  https://github.com/georgestephanis/random-blocks/
  * Description: Some random blocks for the new WordPress Block-based Editor
+ * Version:     0.1
  * Author:      George Stephanis
  * Author URI:  https://stephanis.info/
  * License:     GPLv2+
