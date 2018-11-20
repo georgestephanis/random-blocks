@@ -7,7 +7,8 @@
   "scripts": {
     "build-hours": "parcel build business-hours/business-hours.jsx --out-dir business-hours --public-url .",
     "build-phone": "parcel build contact-phone/contact-phone.jsx --out-dir contact-phone --public-url .",
-    "build": "npm run build-hours & npm run build-phone"
+    "build-time": "parcel build time/time.jsx --out-dir time --public-url .",
+    "build": "npm run build-hours & npm run build-phone & npm run build-time"
   },
   "keywords": [
     "wordpress",

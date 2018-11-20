@@ -132,3 +132,39 @@ function register_contact_phone_block() {
 		'editor_style'  => 'contact-phone-editor',
 	) );
 }
+
+// Time
+
+add_action( 'init', 'register_time_block' );
+function register_time_block() {
+	if ( ! function_exists( 'register_block_type' ) ) {
+		return;
+	}
+
+	wp_register_script(
+		'time-converter-script',
+		plugins_url( 'time/time-converter-script.js', __FILE__ ),
+		array(
+			'jquery',
+		)
+	);
+
+	wp_register_script(
+		'time-block',
+		plugins_url( 'time/time.js', __FILE__ ),
+		array(
+			'wp-blocks',
+			'wp-components',
+			'wp-date',
+			'wp-i18n',
+		)
+	);
+	if ( function_exists( 'wp_set_script_translations' ) ) {
+		wp_set_script_translations( 'time-block', 'random-blocks' );
+	}
+
+	register_block_type( 'random-blocks/time', array(
+		'script' => 'time-converter-script',
+		'editor_script' => 'time-block',
+	) );
+}
