@@ -2,6 +2,12 @@
 
 /**
  * Plugin Name: Random Blocks
+ * Plugin URI:  https://github.com/georgestephanis/random-blocks/
+ * Description: Some random blocks for the new WordPress Block-based Editor
+ * Author:      George Stephanis
+ * Author URI:  https://stephanis.info/
+ * License:     GPLv2+
+ * Text Domain: random-blocks
  */
 
 // Business Hours
