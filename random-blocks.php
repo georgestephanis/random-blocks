@@ -15,15 +15,15 @@ function register_business_hours_block() {
 	}
 
 	wp_register_script(
-	    'business-hours',
-        plugins_url( 'business-hours/business-hours.js', __FILE__ ),
-        array(
-            'wp-blocks',
-            'wp-components',
-            'wp-element',
-            'wp-i18n',
-        )
-    );
+		'business-hours',
+		plugins_url( 'business-hours/business-hours.js', __FILE__ ),
+		array(
+			'wp-blocks',
+			'wp-components',
+			'wp-element',
+			'wp-i18n',
+		)
+	);
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'business-hours', 'random-blocks' );
 	}
@@ -114,13 +114,13 @@ function register_contact_phone_block() {
 	}
 
 	wp_register_script(
-	    'contact-phone-editor',
-        plugins_url( 'contact-phone/contact-phone.js', __FILE__ ),
-        array(
-            'wp-blocks',
-            'wp-i18n',
-        )
-    );
+		'contact-phone-editor',
+		plugins_url( 'contact-phone/contact-phone.js', __FILE__ ),
+		array(
+			'wp-blocks',
+			'wp-i18n',
+		)
+	);
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'contact-phone', 'random-blocks' );
 	}
