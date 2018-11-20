@@ -4,6 +4,35 @@
  * Plugin Name: Random Blocks
  */
 
+// Address
+
+add_action( 'init', 'register_address_block' );
+function register_address_block() {
+	if ( ! function_exists( 'register_block_type' ) ) {
+		return;
+	}
+
+	wp_register_style( 'address-block', plugins_url( 'address/address.css', __FILE__ ) );
+
+	wp_register_script(
+		'address-block',
+		plugins_url( 'address/address.js', __FILE__ ),
+		array(
+			'wp-blocks',
+			'wp-components',
+			'wp-i18n',
+		)
+	);
+	if ( function_exists( 'wp_set_script_translations' ) ) {
+		wp_set_script_translations( 'address-block', 'random-blocks' );
+	}
+
+	register_block_type( 'random-blocks/address', array(
+		'editor_script' => 'address-block',
+		'style' => 'address-block',
+	) );
+}
+
 // Business Hours
 
 add_action( 'init', 'register_business_hours_block' );

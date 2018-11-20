@@ -5,10 +5,11 @@
   "main": "random-blocks.php",
   "private": true,
   "scripts": {
+    "build-address": "parcel build address/address.jsx --out-dir address --public-url .",
     "build-hours": "parcel build business-hours/business-hours.jsx --out-dir business-hours --public-url .",
     "build-phone": "parcel build contact-phone/contact-phone.jsx --out-dir contact-phone --public-url .",
     "build-time": "parcel build time/time.jsx --out-dir time --public-url .",
-    "build": "npm run build-hours & npm run build-phone & npm run build-time"
+    "build": "npm run build-address & npm run build-hours & npm run build-phone & npm run build-time"
   },
   "keywords": [
     "wordpress",
