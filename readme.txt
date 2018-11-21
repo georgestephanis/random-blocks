@@ -3,6 +3,7 @@ Contributors: georgestephanis
 Tags: gutenberg, blocks, editor
 Requires at least: 5.0
 License: GPLv2+
+Stable tag: 0.1
 
 Some random additional blocks for Gutenberg / the new WordPress Block Editor
 
